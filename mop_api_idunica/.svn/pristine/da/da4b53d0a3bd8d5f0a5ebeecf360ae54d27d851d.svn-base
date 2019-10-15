@@ -1,0 +1,56 @@
+package br.embrapa.model;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import br.embrapa.model.pk.ModLocal1_PK;
+
+@Entity
+@Table(name="d03_local1_m")
+//@IdClass(ModLocal1_PK.class)
+public class ModLocal1 {
+
+/*	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="d03_cdlocal1")
+	private Long cdLocal1;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name="d03_cdempresa")
+	private CadEmpresa cdEmpresa;*/
+	
+	@EmbeddedId
+	private ModLocal1_PK pk;
+	
+	@Column(name="d03_nmlocal1")
+	private String nmlocal1;
+
+	public ModLocal1_PK getPk() {
+		return pk;
+	}
+
+	public void setPk(ModLocal1_PK pk) {
+		this.pk = pk;
+	}
+
+	public String getNmlocal1() {
+		return nmlocal1;
+	}
+
+	public void setNmlocal1(String nmlocal1) {
+		this.nmlocal1 = nmlocal1;
+	}
+
+	
+	
+	
+}

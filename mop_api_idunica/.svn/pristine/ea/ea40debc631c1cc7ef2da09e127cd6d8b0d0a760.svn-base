@@ -1,0 +1,88 @@
+package br.embrapa.model;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import br.embrapa.model.pk.ModNivel4_PK;
+
+@Entity
+@Table(name="d13_nivel4_m")
+public class ModNivel4 {
+	
+	
+	@EmbeddedId
+	private ModNivel4_PK pkNivel4;
+	
+	@Column(name="d13_nmnivel4")
+	private String nmNivel4;
+	
+	
+
+	public ModNivel4() {
+	}
+	
+	
+	public ModNivel4(ModNivel4_PK pkNivel4, String nmNivel4) {
+		this.pkNivel4 = pkNivel4;
+		this.nmNivel4 = nmNivel4;
+	}
+
+
+	public ModNivel4_PK getPkNivel4() {
+		return pkNivel4;
+	}
+
+
+	public void setPkNivel4(ModNivel4_PK pkNivel4) {
+		this.pkNivel4 = pkNivel4;
+	}
+
+
+	public String getNmNivel4() {
+		return nmNivel4;
+	}
+
+
+	public void setNmNivel4(String nmNivel4) {
+		this.nmNivel4 = nmNivel4;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nmNivel4 == null) ? 0 : nmNivel4.hashCode());
+		result = prime * result + ((pkNivel4 == null) ? 0 : pkNivel4.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModNivel4 other = (ModNivel4) obj;
+		if (nmNivel4 == null) {
+			if (other.nmNivel4 != null)
+				return false;
+		} else if (!nmNivel4.equals(other.nmNivel4))
+			return false;
+		if (pkNivel4 == null) {
+			if (other.pkNivel4 != null)
+				return false;
+		} else if (!pkNivel4.equals(other.pkNivel4))
+			return false;
+		return true;
+	}
+
+	
+
+	
+}

@@ -1,0 +1,70 @@
+package br.embrapa.model;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import br.embrapa.model.pk.ModNivel2_PK;
+
+@Entity
+@Table(name="d11_nivel2_m")
+public class ModNivel2 {
+	
+	@EmbeddedId
+	private ModNivel2_PK pkNivel2;
+	
+	@Column(name="d11_nmnivel2")
+	private String nmNivel2;
+
+	public ModNivel2_PK getPkNivel2() {
+		return pkNivel2;
+	}
+
+	public void setPkNivel2(ModNivel2_PK pkNivel2) {
+		this.pkNivel2 = pkNivel2;
+	}
+
+	public String getNmNivel2() {
+		return nmNivel2;
+	}
+
+	public void setNmNivel2(String nmNivel2) {
+		this.nmNivel2 = nmNivel2;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nmNivel2 == null) ? 0 : nmNivel2.hashCode());
+		result = prime * result + ((pkNivel2 == null) ? 0 : pkNivel2.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModNivel2 other = (ModNivel2) obj;
+		if (nmNivel2 == null) {
+			if (other.nmNivel2 != null)
+				return false;
+		} else if (!nmNivel2.equals(other.nmNivel2))
+			return false;
+		if (pkNivel2 == null) {
+			if (other.pkNivel2 != null)
+				return false;
+		} else if (!pkNivel2.equals(other.pkNivel2))
+			return false;
+		return true;
+	}
+	
+	
+
+	
+}

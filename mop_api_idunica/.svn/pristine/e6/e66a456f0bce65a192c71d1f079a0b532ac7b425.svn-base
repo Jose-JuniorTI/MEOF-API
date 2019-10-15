@@ -1,0 +1,32 @@
+package br.embrapa.model.pk;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+
+import br.embrapa.model.ModNivel1;
+
+public class ModNivel2_PK implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="d11_cdempresa", referencedColumnName="d10_cdempresa", foreignKey = @ForeignKey(name="local2_fk")),
+		@JoinColumn(name="d11_cdnivel1", referencedColumnName="d10_cdnivel1", foreignKey = @ForeignKey(name="local2_fk"))
+	})
+	private ModNivel1 modNivel1;
+	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="d11_cdnivel2")
+	private Long cdNivel2;
+}

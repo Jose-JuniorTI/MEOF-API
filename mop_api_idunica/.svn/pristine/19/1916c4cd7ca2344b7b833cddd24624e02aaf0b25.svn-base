@@ -1,0 +1,64 @@
+package br.embrapa.model;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.mapping.PersistentClass;
+import org.hibernate.persister.entity.AbstractEntityPersister;
+import org.hibernate.tuple.entity.EntityMetamodel;
+
+import br.embrapa.model.pk.ModLocal2_PK;
+
+@Entity
+@Table(name="d04_local2_m")
+//@IdClass(ModLocal2_PK.class)
+public class ModLocal2 {
+
+	/*@Id
+	@Column(name="d04_cdlocal2")
+	private Long cdLocal2;
+	
+	@Id
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="d04_cdlocal1",referencedColumnName="d03_cdlocal1"),
+		@JoinColumn(name="d04_cdempresa", referencedColumnName="d03_cdempresa")
+	})
+	private ModLocal1 modLocal1;*/
+	
+	@EmbeddedId
+	private ModLocal2_PK pk;
+	
+	@Column(name="d04_nmlocal2")
+	private String nmLocal2;
+
+	public ModLocal2_PK getPk() {
+		return pk;
+	}
+
+	public void setPk(ModLocal2_PK pk) {
+		this.pk = pk;
+	}
+
+	public String getNmLocal2() {
+		return nmLocal2;
+	}
+
+	public void setNmLocal2(String nmLocal2) {
+		this.nmLocal2 = nmLocal2;
+	}
+	
+	
+
+	
+	
+}
