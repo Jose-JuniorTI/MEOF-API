@@ -16,37 +16,37 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import br.embrapa.model.CadEmpresa;
-import br.embrapa.model.CadEmpresa_;
-import br.embrapa.repository.filter.CadEmpresaFilter;
+import br.embrapa.model.AreaManejoFlorestal;
+import br.embrapa.model.AreaManejoFlorestal_;
+import br.embrapa.repository.filter.AreaManejoFlorestalFilter;
 
-public class CadEmpresaRepositoryImpl implements CadEmpresaRepositoryQuery {
+public class AreaManejoFlorestalRepositoryImpl implements AreaManejoFlorestalRepositoryQuery {
 
 	
 	@PersistenceContext
 	private EntityManager manager;
 	
 	@Override
-	public Page<CadEmpresa> filtrar(CadEmpresaFilter cadEmpresFilter, Pageable pageable) {
+	public Page<AreaManejoFlorestal> filtrar(AreaManejoFlorestalFilter areaManejoFlorestalFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<CadEmpresa> criteria = builder .createQuery(CadEmpresa.class);
-		Root<CadEmpresa> root = criteria.from(CadEmpresa.class);
+		CriteriaQuery<AreaManejoFlorestal> criteria = builder .createQuery(AreaManejoFlorestal.class);
+		Root<AreaManejoFlorestal> root = criteria.from(AreaManejoFlorestal.class);
 		
-		Predicate[] predicates = criarRestricoes(cadEmpresFilter, builder, root);
+		Predicate[] predicates = criarRestricoes(areaManejoFlorestalFilter, builder, root);
 		criteria.where(predicates);
 		
-		TypedQuery<CadEmpresa> query = manager.createQuery(criteria);
+		TypedQuery<AreaManejoFlorestal> query = manager.createQuery(criteria);
 		adiconarRestricoesDePaginacao(query, pageable);
 		
-		return new PageImpl<>(query.getResultList(), pageable, total(cadEmpresFilter));
+		return new PageImpl<>(query.getResultList(), pageable, total(areaManejoFlorestalFilter));
 	}
 
-	private Long total(CadEmpresaFilter cadEmpresFilter) {
+	private Long total(AreaManejoFlorestalFilter areaManejoFlorestalFilter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-		Root<CadEmpresa> root = criteria.from(CadEmpresa.class);
+		Root<AreaManejoFlorestal> root = criteria.from(AreaManejoFlorestal.class);
 		
-		Predicate[] predicates = criarRestricoes(cadEmpresFilter, builder, root);
+		Predicate[] predicates = criarRestricoes(areaManejoFlorestalFilter, builder, root);
 		criteria.where(predicates);
 		
 		criteria.select(builder.count(root));
@@ -66,13 +66,13 @@ public class CadEmpresaRepositoryImpl implements CadEmpresaRepositoryQuery {
 	
 	// CRIAR FILTROS DE PESQUISA
 	
-	private Predicate[] criarRestricoes(CadEmpresaFilter cadEmpresaFilter, CriteriaBuilder builder,
-			Root<CadEmpresa> root) {
+	private Predicate[] criarRestricoes(AreaManejoFlorestalFilter areaManejoFlorestalaFilter, CriteriaBuilder builder,
+			Root<AreaManejoFlorestal> root) {
 		
 		List<Predicate> predicates = new ArrayList<>();
-		if(!StringUtils.isEmpty(cadEmpresaFilter.getNmEmpresa())) {
+		if(!StringUtils.isEmpty(areaManejoFlorestalaFilter.getNmProjeto())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(CadEmpresa_.nmEmpresa)), "%" + cadEmpresaFilter.getNmEmpresa().toLowerCase() + "%"));
+					builder.lower(root.get(AreaManejoFlorestal_.nmProjeto)), "%" + areaManejoFlorestalaFilter.getNmProjeto().toLowerCase() + "%"));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
